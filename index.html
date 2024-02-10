@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+   
+
+        // Function to create a new product element
+        function createProductElement(imageSrc, title, description, price) {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.alt = title;
+
+            const h2 = document.createElement('h2');
+            h2.textContent = title;
+
+            const p = document.createElement('p');
+            p.textContent = description;
+
+            const span = document.createElement('span');
+            span.classList.add('price');
+            span.textContent = `$${price}`;
+
+            const addToCartButton = document.createElement('button');
+            addToCartButton.textContent = 'Add to Cart';
+            addToCartButton.classList.add('addToCartButton');
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '  Delete';
+            deleteButton.classList.add('deleteButton');
+            deleteButton.onclick = function() {
+                // Call deleteProduct function passing this button element
+                deleteProduct(this);
+            };
+
+            productDiv.appendChild(img);
+            productDiv.appendChild(h2);
+            productDiv.appendChild(p);
+            productDiv.appendChild(span);
+            productDiv.appendChild(addToCartButton);
+            productDiv.appendChild(deleteButton);
+
+            return productDiv;
+        }
+
+        // Function to add a new product to the page
+        function addNewProduct(imageSrc, title, description, price) {
+            const productContainer = document.getElementById('productContainer');
+            const newProduct = createProductElement(imageSrc, title, description, price);
+            productContainer.appendChild(newProduct);
+        }
+
+        // Function to delete product
+        function deleteProduct(button) {
+            // Get the product container
+            const productContainer = button.parentElement;
+            // Remove the product from the container
+            productContainer.remove();
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Product Catalog</h1>
+        <button id="addProductButton">Add New Product</button>
+    </header>
+    <div class="container" id="productContainer"> 
+        
+       <script>document.getElementById('addProductButton').addEventListener('click', function() {
+        window.open('add_product.html', '_blank');
+    });</script>
+        <!-- Add more products here -->
+    </div>
+    
+    <script src="script.js"></script>
+ 
+</body>
+</html>
